@@ -1,0 +1,64 @@
+/* ============= body ============== */
+
+body {
+    background-color: black;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+/* ============= Fin body ============== */
+
+/* ============= navbar ============== */
+nav {
+    background-color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+/* ============= Fin navbar ============== */
+
+/* ============= Menu ============== */
+#menu a {
+        font-size: 18px;
+        font-weight:bold;
+        color: grey
+}
+
+#menu button    {
+    font-size: 18px;
+    font-weight:bold;
+}
+/* ============= Fin Menu ============== */
+
+/* ============= carousel ============== */
+.carousel-inner {
+    max-height: 39rem;
+} 
+
+/* ============= Fin carousel ============== */
+
+/* ============= media queris pantalla sm ============== */
+@media (max-width: 768px) {
+    #intro, #comprarlo {
+        width:90% !important;   
+    }
+
+    #equipo p{
+        display: none;
+    }
+    .servicio-fila{
+        width: 100% !important;
+        text-align: center
+    }
+}
+/* ============= Fin media queris pantalla ============== */
+
+/* ============= media queris pantalla extra sm ============== */
+@media (max-width: 576px) {
+    .icono-wrap {
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+}
+/* ============= Fin media queris pantalla extra sm ============== */
