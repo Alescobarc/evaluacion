@@ -26,6 +26,7 @@
                 <p class="mb-0"><span class="text-light" >Ordenar por:</span> <a href="#!" class="text-light">precio<i
                       class="fas fa-angle-down mt-1"></i></a></p>
               </div>
+              <button id="convertToPesos" class="btn btn-primary">Convertir a pesos</button>
             </div>
     
             <div class="card rounded-3 mb-4 " style="background-color: black;">
@@ -60,7 +61,7 @@
                     </button>
                   </div>
                   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                    <h5 class="mb-0 text-light">$50.00</h5>
+                    <h5 class="pesoschilenos text-light">$50</h5>
                   </div>
                   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -101,7 +102,7 @@
                     </button>
                   </div>
                   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                    <h5 class="mb-0 text-light">$20.00</h5>
+                    <h5 class="pesoschilenos text-light">$20</h5>
                   </div>
                   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -142,7 +143,7 @@
                     </button>
                   </div>
                   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                    <h5 class="mb-0 text-light">$10.00</h5>
+                    <h5 class="pesoschilenos text-light">$10</h5>
                   </div>
                   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -170,5 +171,30 @@
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      var isDollar = true; // Estado inicial: los precios están en dólares
+var exchangeRate = 926; // Tasa de cambio de dólares a pesos chilenos
+
+document.getElementById('convertToPesos').addEventListener('click', function() {
+    var priceElements = document.querySelectorAll('.pesoschilenos');
+
+    priceElements.forEach(function(priceElement) {
+        var price = parseFloat(priceElement.textContent.replace('$', '').replace(' CLP', ''));
+
+        if (isDollar) {
+            // Si los precios están en dólares, conviértelos a pesos chilenos
+            var priceInPesos = Math.round(price * exchangeRate);
+            priceElement.textContent = '$' + priceInPesos + ' CLP';
+        } else {
+            // Si los precios están en pesos chilenos, conviértelos a dólares
+            var priceInDollars = Math.round(price / exchangeRate);
+            priceElement.textContent = '$' + priceInDollars;
+        }
+    });
+
+    // Cambiar el estado
+    isDollar = !isDollar;
+});
+    </script>
   </body>
 </html>
