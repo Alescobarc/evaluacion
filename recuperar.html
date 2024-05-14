@@ -6,6 +6,37 @@
     <title>Recuperar contraseña - Rockstar Games</title>
     <link rel="icon" href="img/rockstar.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOMContentLoaded event fired"); // Para verificar que el evento DOMContentLoaded se dispara
+
+        var form = document.querySelector('form');
+        if (!form) {
+          console.log("Form not found"); // Para verificar que el formulario se encuentra
+        } else {
+          form.addEventListener('submit', function(event) {
+            console.log("Submit event fired"); // Para verificar que el evento submit se dispara
+
+            event.preventDefault(); // Evita la recarga de la página
+
+            var email = document.getElementById('form3Example3cg').value;
+            console.log("Email: " + email); // Para verificar el valor del correo electrónico
+
+            // Expresión regular para validar el correo electrónico
+            var emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+            if (!emailRegex.test(email)) {
+              // Si el correo electrónico no es válido, muestra un mensaje al usuario
+              console.log("Invalid email"); // Para verificar si el correo electrónico es inválido
+              alert('Por favor, introduce un correo electrónico válido.');
+            } else {
+              // ...
+            }
+          });
+        }
+      });
+    </script>
   </head>
   <body><section class="vh-100 bg-image"
     style="background-image: url('img/wallpaper-login.jpg'); background-size: cover; background-position: center;">
@@ -23,8 +54,8 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <a href="main.html"><button type="button"
-                      data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Enviar solicitud</button></a>
+                    <button type="submit"
+                      data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Enviar solicitud</button>
                   </div>
                 </form>
               </div>
