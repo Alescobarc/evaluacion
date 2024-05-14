@@ -34,5 +34,9 @@ setTimeout(function() {
     setTimeout(function() {
         document.getElementById('loader').style.display = 'none';
     }, 2000);
+    setTimeout(function() {
+        // Redirige a la página principal
+        window.location.href = 'main.html';
+      }, 5000);
 }, 2000);
 });
