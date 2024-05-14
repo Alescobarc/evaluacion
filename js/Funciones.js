@@ -14,15 +14,11 @@ document.getElementById('convertToPesos').addEventListener('click', function() {
               priceElement.textContent = '$' + priceInDollars;
              }
 });
-
-
-
-
-
-
 // Cambiar el estado
 isDollar = !isDollar;
 });
+
+
 
 
 document.querySelector('.w-100.btn.btn-primary.btn-lg').addEventListener('click', function(event) {
