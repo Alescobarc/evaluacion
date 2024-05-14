@@ -80,3 +80,9 @@ nav {
     margin-right: auto;
     width: 50%;
   }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
