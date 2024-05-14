@@ -9,6 +9,57 @@
     <link href="css/checkout.css" rel="stylesheet">
     <script src ="js/jquery-3.7.1.js"></script>
     <script>
+     $(document).ready(function() {
+    $('#checkout-form').on('submit', function(e) {
+        // Evita la acción predeterminada del botón submit
+        e.preventDefault();
+
+        // Muestra el loader
+        $('#loader').show();
+
+        // Validar campos de texto
+        var campos = ['firstName', 'lastName', 'email', 'telefono', 'direccion', 'pais', 'region', 'comuna', 'cpostal', 'cc-name', 'cc-number', 'cc-expiration', 'cc-cvv'];
+        for (var i = 0; i < campos.length; i++) {
+            if ($('#' + campos[i]).val() === '') {
+                alert('Por favor rellene el campo ' + campos[i]);
+                $('#loader').hide(); // Oculta el loader si hay un error
+                return false;
+            }
+        }
+
+        // Validar formato de correo electrónico
+        var email = $('#email').val();
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (!emailReg.test(email)) {
+            alert('Por favor ingrese un correo electrónico válido');
+            $('#loader').hide(); // Oculta el loader si hay un error
+            return false;
+        }
+
+        // Validar formato de número de tarjeta de crédito
+        var ccNumber = $('#cc-number').val();
+        var ccReg = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+        if (!ccReg.test(ccNumber)) {
+            alert('Por favor ingrese un número de tarjeta de crédito válido');
+            $('#loader').hide(); // Oculta el loader si hay un error
+            return false;
+        }
+
+        // Espera 2 segundos, luego muestra el mensaje de agradecimiento y oculta el loader
+        setTimeout(function() {
+            $('#loader').html('<p class="text-light">Gracias por su compra</p>');
+            setTimeout(function() {
+                $('#loader').hide();
+            }, 2000);
+            setTimeout(function() {
+                // Redirige a la página principal
+                window.location.href = 'main.html';
+            }, 5000);
+        }, 2000);
+    });
+});
+
+
       $(document).ready(function() {
         var isDollar = true; // Estado inicial: los precios están en dólares
         var exchangeRate = 926; // Tasa de cambio de dólares a pesos chilenos
@@ -39,50 +90,8 @@
         });
       });
 
-      $(document).ready(function() {
-        $('button[type="submit"]').click(function(event) {
-          // Evita la acción predeterminada del botón submit
-          event.preventDefault();
-
-          // Muestra el loader
-          $('#loader').show();
-
-          // Espera 2 segundos, luego muestra el mensaje de agradecimiento y oculta el loader
-          setTimeout(function() {
-            $('#loader').html('<p class="text-light">Gracias por su compra</p>');
-            setTimeout(function() {
-              $('#loader').hide();
-            }, 2000);
-            setTimeout(function() {
-              // Redirige a la página principal
-              window.location.href = 'main.html';
-            }, 5000);
-          }, 2000);
-        });
-      });
-
-      $(document).ready(function() {
-       $('#checkout-form').submit(function(e) {
-      var isValid = true;
-
-        // Aquí puedes agregar tus propias reglas de validación
-        // Por ejemplo, puedes verificar que todos los campos requeridos estén llenos
-        $(this).find('input[required]').each(function() {
-          if ($(this).val() === '') {
-          isValid = false;
-        $(this).addClass('is-invalid'); // Agrega una clase para mostrar visualmente que el campo no es válido
-          }else{
-        $(this).removeClass('is-invalid'); // Elimina la clase si el campo es válido
-      }
-    });
-
-    // Si el formulario no es válido, evita que se envíe
-    if (!isValid) {
-      e.preventDefault();
-    }
-  });
-});
-    </script> 
+    
+      </script>
   </head>
 
   <body style=" background: radial-gradient(rgb(128, 13, 13), rgb(0, 0, 0))">
@@ -140,7 +149,7 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label text-light">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Por favor rellene con su nombre.
               </div>
@@ -148,8 +157,8 @@
 
 
             <div class="col-sm-6">
-              <label for="lastName" class="form-label text-light">Apellido</label>
-              <input type="text" class="form-control" id="apellido" placeholder="" value="" required>
+              <label for="lastName" class="form-label text-light" >Apellido</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Por favor rellene con su apellido.
               </div>
@@ -158,7 +167,7 @@
 
             <div class="col-12">
               <label for="email" class="form-label text-light">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com">
+              <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
               <div class="invalid-feedback">
                 Por favor rellene con su email para noticias y novedades.
               </div>
@@ -166,7 +175,7 @@
 
             <div class="col-12">
               <label for="email" class="form-label text-light">Teléfono</label>
-              <input type="text" class="form-control" id="telefono" placeholder="+56 9 1234 5678">
+              <input type="text" class="form-control" id="telefono" placeholder="+56 9 1234 5678" required>
               <div class="invalid-feedback">
                 Por favor rellene con número telefónico.
               </div>
@@ -183,8 +192,8 @@
 
 
             <div class="col-12">
-              <label for="address2" class="form-label text-light">Dirección 2 <span class="text-light">(Optional)</span></label>
-              <input type="text" class="form-control" id="direccion2" placeholder="Casa, departamento, etc.">
+              <label for="address2" class="form-label text-light">Dirección 2 <span class="text-light" required></span>>(Optional)</span></label>
+              <input type="text" class="form-control" id="direccion2" placeholder="Casa, departamento, etc." required>
             </div>
 
 
@@ -215,10 +224,10 @@
                 Por favor elija una región válida.
               </div>
             </div>
-
+            
             <div class="col-md-4">
-              <label for="state" class="form-label text-light">Comúna</label>
-              <select class="form-select" id="region" required>
+              <label for="comuna" class="form-label text-light">Comúna</label>
+              <select class="form-select" id="comuna" required>
                 <option value="">Seleccionar...</option>
                 <option>Cerrillos</option>
                 <option>Maipú</option>
@@ -228,19 +237,17 @@
                 <option>La Dehesa</option>
               </select>
               <div class="invalid-feedback">
-                Por favor elija una región válida.
+                Por favor elija una comuna válida.
               </div>
             </div>
-
-
+            
             <div class="col-md-3">
               <label for="zip" class="form-label text-light">Código postal</label>
               <input type="text" class="form-control" id="cpostal" placeholder="" required>
               <div class="invalid-feedback">
-                Zip code required.
+                Se requiere el código postal.
               </div>
             </div>
-          </div>
 
           <hr class="my-4">
 
