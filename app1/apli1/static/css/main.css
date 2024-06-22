@@ -1,0 +1,70 @@
+/* Definición de la fuente personalizada */
+@font-face {
+    font-family: 'Chinese Rocks';
+    src: url('{% static "font/chinese_rocks/chinese_rocks_rg.otf" %}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Estilos generales para el cuerpo y la barra de navegación */
+body {
+    background-color: black;
+    overflow-x: hidden;
+    font-family: 'Chinese Rocks', sans-serif; /* Fuente principal con respaldo */
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 0.05em;
+}
+
+nav {
+    background-color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Estilos para elementos del menú */
+#menu a, #menu button {
+    font-size: 18px;
+    font-weight: bold;
+    color: grey;
+}
+
+/* Estilos para elementos dentro de media queries */
+@media (max-width: 768px) {
+    #intro, #comprarlo {
+        width: 90% !important;
+    }
+
+    #equipo p {
+        display: none;
+    }
+
+    .servicio-fila {
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .icono-wrap {
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+}
+
+/* Clases de estilo adicionales */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
