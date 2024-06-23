@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Checkout - Rockstar Games</title>
+    <link rel="shortcut icon" href="img/rockstar.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/checkout.css" rel="stylesheet">
+    <script src ="js/jquery-3.7.1.js"></script>
+    <script>
+     $(document).ready(function() {
+    $('#checkout-form').on('submit', function(e) {
+        // Evita la acción predeterminada del botón submit
+        e.preventDefault();
+
+        // Muestra el loader
+        $('#loader').show();
+
+        // Validar campos de texto
+        var campos = ['firstName', 'lastName', 'email', 'telefono', 'direccion', 'pais', 'region', 'comuna', 'cpostal', 'cc-name', 'cc-number', 'cc-expiration', 'cc-cvv'];
+        for (var i = 0; i < campos.length; i++) {
+            if ($('#' + campos[i]).val() === '') {
+                alert('Por favor rellene el campo ' + campos[i]);
+                $('#loader').hide(); // Oculta el loader si hay un error
+                return false;
+            }
+        }
+
+        // Validar formato de correo electrónico
+        var email = $('#email').val();
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (!emailReg.test(email)) {
+            alert('Por favor ingrese un correo electrónico válido');
+            $('#loader').hide(); // Oculta el loader si hay un error
+            return false;
+        }
+
+        // Validar formato de número de tarjeta de crédito
+        var ccNumber = $('#cc-number').val();
+        var ccReg = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+        if (!ccReg.test(ccNumber)) {
+            alert('Por favor ingrese un número de tarjeta de crédito válido');
+            $('#loader').hide(); // Oculta el loader si hay un error
+            return false;
+        }
+
+        // Espera 2 segundos, luego muestra el mensaje de agradecimiento y oculta el loader
+        setTimeout(function() {
+            $('#loader').html('<p class="text-light">Gracias por su compra</p>');
+            setTimeout(function() {
+                $('#loader').hide();
+            }, 2000);
+            setTimeout(function() {
+                // Redirige a la página principal
+                window.location.href = 'main.html';
+            }, 5000);
+        }, 2000);
+    });
+});
+
+
+      $(document).ready(function() {
+        var isDollar = true; // Estado inicial: los precios están en dólares
+        var exchangeRate = 926; // Tasa de cambio de dólares a pesos chilenos
+
+        $('#convertToPesos').click(function() {
+          // Obtén la tasa de cambio actual de la API
+          $.getJSON('https://mindicador.cl/api', function(data) {
+            exchangeRate = data.dolar.valor;
+
+            $('.pesoschilenos').each(function() {
+              var price = parseFloat($(this).text().replace('$', '').replace(' CLP', ''));
+              if (isDollar) {
+                // Si los precios están en dólares, conviértelos a pesos chilenos
+                var priceInPesos = Math.round(price * exchangeRate);
+                $(this).text('$' + priceInPesos + ' CLP');
+              } else {
+                // Si los precios están en pesos chilenos, conviértelos a dólares
+                var priceInDollars = Math.round(price / exchangeRate);
+                $(this).text('$' + priceInDollars);
+              }
+            });
+
+            // Cambiar el estado
+            isDollar = !isDollar;
+          }).fail(function() {
+            console.log('Error al consumir la API!');
+          });
+        });
+      });
+
+    
+      </script>
+  </head>
+
+  <body style=" background: radial-gradient(rgb(128, 13, 13), rgb(0, 0, 0))">
+    <div id="loader" style="display: none;">
+      <p class="text-light">Cargando...</p>
+    </div>
+    <div class="container" >
+    <main>
+
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="img/rockstar.png" alt="" width="69" height="57">
+      <h2 class="text-light">Pago Online</h2>
+    </div>
+
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-light">Tu carrito</span>
+          <span class="badge bg-primary rounded-pill">2</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Red Dead Redemption</h6>
+              <small class="text-body-secondary">Estándar</small>
+            </div>
+            <span class="pesoschilenos">$20</span>
+          </li>
+
+
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Red Dead Redemption 2</h6>
+              <small class="text-body-secondary">Estándar</small>
+            </div>
+            <span class="pesoschilenos">$50</span>
+          </li>
+
+
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong class="pesoschilenos">$70</strong>
+          </li>
+
+
+          <button id="convertToPesos" class="btn btn-primary">Convertir a pesos</button>
+        </ul>
+      </div>
+
+
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3 text-light">Ingresa tus datos</h4>
+        <form id="checkout-form" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label text-light">Nombre</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Por favor rellene con su nombre.
+              </div>
+            </div>
+
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label text-light" >Apellido</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Por favor rellene con su apellido.
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <label for="email" class="form-label text-light">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
+              <div class="invalid-feedback">
+                Por favor rellene con su email para noticias y novedades.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label text-light">Teléfono</label>
+              <input type="text" class="form-control" id="telefono" placeholder="+56 9 1234 5678" required>
+              <div class="invalid-feedback">
+                Por favor rellene con número telefónico.
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <label for="address" class="form-label text-light">Dirección</label>
+              <input type="text" class="form-control" id="direccion" placeholder="Av. Américo Vespucio 1501" required>
+              <div class="invalid-feedback">
+                Por favor ingrese su dirección.
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <label for="address2" class="form-label text-light">Dirección 2 <span class="text-light" required></span>>(Optional)</span></label>
+              <input type="text" class="form-control" id="direccion2" placeholder="Casa, departamento, etc." required>
+            </div>
+
+
+            <div class="col-12">
+              <label for="country" class="text-light">País</label>
+              <select class="form-select" id="pais" required>
+                <option value="">Seleccionar...</option>
+                <option>Chile</option>
+              </select>
+              <div class="invalid-feedback">
+                Por favor elija un país válido.
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <label for="state" class="form-label text-light">Región</label>
+              <select class="form-select" id="region" required>
+                <option value="">Seleccionar...</option>
+                <option>Región Metropolitana</option>
+                <option>Arica y Parinacota</option>
+                <option>Atacama</option>
+                <option>BioBío</option>
+                <option>Coquimbo</option>
+                <option>Valparaíso</option>
+              </select>
+              <div class="invalid-feedback">
+                Por favor elija una región válida.
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="comuna" class="form-label text-light">Comúna</label>
+              <select class="form-select" id="comuna" required>
+                <option value="">Seleccionar...</option>
+                <option>Cerrillos</option>
+                <option>Maipú</option>
+                <option>Santiago</option>
+                <option>San Bernardo</option>
+                <option>Vitacura</option>
+                <option>La Dehesa</option>
+              </select>
+              <div class="invalid-feedback">
+                Por favor elija una comuna válida.
+              </div>
+            </div>
+            
+            <div class="col-md-3">
+              <label for="zip" class="form-label text-light">Código postal</label>
+              <input type="text" class="form-control" id="cpostal" placeholder="" required>
+              <div class="invalid-feedback">
+                Se requiere el código postal.
+              </div>
+            </div>
+
+          <hr class="my-4">
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label text-light" for="same-address">Entregar a la misma dirección de la facturación.</label>
+          </div>
+
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label text-light" for="save-info">Guarda esta información para la próxima vez.</label>
+          </div>
+
+
+          <hr class="my-4">
+
+          <h4 class="mb-3 text-light">Pago</h4>
+
+          <div class="my-3">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+              <label class="form-check-label text-light" for="credit">Tarjeta de Credito</label>
+            </div>
+
+
+            <div class="form-check">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+              <label class="form-check-label text-light" for="debit">Tarjeta de Debito</label>
+            </div>
+
+
+            <div class="form-check">
+              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+              <label class="form-check-label text-light" for="paypal">PayPal</label>
+            </div>
+          </div>
+
+
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <label for="cc-name" class="form-label text-light">Nombre en la tarjeta.</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <small class="text-light">Nombre completo en la tarjeta.</small>
+              <div class="invalid-feedback text-light">
+                Se requiere el nombre en la tarjeta.
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <label for="cc-number" class="form-label text-light">Número de tarjeta.</label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <div class="invalid-feedback text-light">
+                Se requiere el número de tarjeta.
+              </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <label for="cc-expiration" class="form-label text-light">Fecha Vencimiento</label>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <div class="invalid-feedback">
+                Se requiere la fecha de vencimiento de la tarjeta.
+              </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <label for="cc-cvv" class="form-label text-light">CVV</label>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <div class="invalid-feedback">
+                Se requiere el código de seguridad CVV.
+              </div>
+            </div>
+          </div>
+
+
+
+          <hr class="my-4">
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Pagar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <p class="mb-1 text-light">&copy; Rockstar Games 2024</p>
+    <ul class="list-inline">
+      <li class="list-inline-item text-light"><a href="#">Acuerdo de privacidad</a></li>
+      <li class="list-inline-item text-light"><a href="#">Terminos y condiciones</a></li>
+      <li class="list-inline-item text-light"><a href="#">Soporte</a></li>
+    </ul>
+  </footer>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
