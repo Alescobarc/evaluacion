@@ -1,5 +1,4 @@
-{%load static%}
-
+{% load static %}
 <!doctype html>
 <html lang="es">
 <head>
@@ -8,14 +7,28 @@
     <title>{{ title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    <link rel="icon" href="{%static '/rockstar.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static '/rockstar.png' %}" type="image/x-icon">
+    <style>
+      @keyframes slideInFromBottom {
+          0% {
+              transform: translateY(100%);
+          }
+          100% {
+              transform: translateY(0);
+          }
+      }
+
+      .modal.fade .modal-dialog {
+          animation: slideInFromBottom 0.3s ease-out forwards;
+      }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg" id="menu">
     <div class="container-fluid" style="font-family: 'Courier New', Courier, monospace;">
-      <a class="navbar-brand" >
+      <a class="navbar-brand">
         <span class="text-warning fs-5 fw-bold">Rockstar Games</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +37,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class= "nav-link active text-light"  href="{% url 'index' %}">Inicio</a>
+            <a class="nav-link active text-light" href="{% url 'index' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="{% url 'login' %}" >Iniciar sesión</a>
+            <a class="nav-link text-light" href="{% url 'login' %}">Iniciar sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-light" href="{% url 'register'%}">Registrarse</a>
@@ -35,193 +48,234 @@
         </ul>
       </div>
     </div>
-  </nav>
-<!-- FIN NAVBAR -->
+</nav>
+<!-- Fin Navbar -->
 
 <!-- Carrusel -->
-
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static 'img/carrusel-uno.jpg' %}" class="d-block w-100" alt="Captura uno">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'img/carrusel-2.jpg' %}" class="d-block w-100" alt="Captura dos">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'img/carrusel-tres.jpg' %}" class="d-block w-100" alt="Captura tres">
-            </div>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/carrusel-uno.jpg' %}" class="d-block w-100" alt="Captura uno">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/carrusel-2.jpg' %}" class="d-block w-100" alt="Captura dos">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/carrusel-tres.jpg' %}" class="d-block w-100" alt="Captura tres">
         </div>
     </div>
+</div>
+<!-- Fin Carrusel -->
 
-<!-- Fin del Carrusel -->
-
-<!-- Historia red dead 2 -->
+<!-- Historia Red Dead 2 -->
 <section class="w-50 mx-auto text-center pt-5" id="intro">
     <span class="text-danger fs-2 ">Saga Red Dead </span>
     <h1 class="fs-4 text-light" style="font-family: 'Courier New', Courier, monospace;">
         <br>
-        Es una saga de 3 videojuego de acción-aventura western en donde seguimos la historia de 3 personajes entrañables,
-        en la primera entrega es Red Harlow, en su sucesor espiritual es John Marston y en la ultima entrega y mas famosa es Arthur Morgan.</h1>
+        Es una saga de 3 videojuegos de acción-aventura western en donde seguimos la historia de 3 personajes entrañables,
+        en la primera entrega es Red Harlow, en su sucesor espiritual es John Marston y en la última entrega y más famosa es Arthur Morgan.
+    </h1>
   
-        <h1 class="p-3 fs-4 text-light" style="font-family: 'Courier New', Courier, monospace;">En nuestra ultima entrega, Red Dead Redemption 2, posee varios personajes destacables dentro de los cuales se encuentran los siguientes: </h1>
-  </section>
-<!-- fin Historia red dead 2-->
+    <h1 class="p-3 fs-4 text-light" style="font-family: 'Courier New', Courier, monospace;">En nuestra última entrega, Red Dead Redemption 2, posee varios personajes destacables dentro de los cuales se encuentran los siguientes:</h1>
+</section>
+<!-- Fin Historia Red Dead 2 -->
 
 <!-- Personajes -->
 <section class="container-fluid">
     <div class="row w-75 mx-auto my-5 servicio-fila">
-        <!-- Primer Pesonaje(arthur morgan) -->
+        <!-- Primer Personaje (Arthur Morgan) -->
         <div class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-            <img src="{%static 'img/arthur-morgan.png' %}" alt="RED DEAD 2 IMG" width="180" height="160">
+            <img src="{% static 'img/arthur-morgan.png' %}" alt="RED DEAD 2 IMG" width="180" height="160">
             <div>
-                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Arthur morgan</h3>
+                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Arthur Morgan</h3>
                 <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;"> Arthur Morgan, nacido alrededor de 1863, es el protagonista central de Red Dead Redemption 2. Criado por Dutch van der Linde y Hosea Matthews, Arthur es un forajido leal, valiente y temerario</p>
             </div>
         </div>
-        <!-- Segundo personaje(john marston) -->
+        <!-- Segundo personaje (John Marston) -->
         <div class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-            <img src="{%static 'img/john.png'%}" alt="RED DEAD 2 IMG" width="180" height="160">
+            <img src="{% static 'img/john.png' %}" alt="RED DEAD 2 IMG" width="180" height="160">
             <div>
                 <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">John Marston</h3>
-                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">John Marston, alrededor de 1873, formó parte de la conocida banda de Dutch van der Linde junto a Hosea Matthews y Arthur Morgan. Es como un hermano para arthur debido a que se criaron juntos.</p>
+                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">John Marston, alrededor de 1873, formó parte de la conocida banda de Dutch van der Linde junto a Hosea Matthews y Arthur Morgan. Es como un hermano para Arthur debido a que se criaron juntos.</p>
             </div>
         </div>
     </div>
     <div class="row w-75 mx-auto my-5 servicio-fila">
-        <!-- tercer personaje(dutch van der linde) -->
+        <!-- Tercer personaje (Dutch van der Linde) -->
         <div class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-            <img src="{% static 'img/dutch.png'%}" alt="RED DEAD 2 IMG" width="180" height="160">
+            <img src="{% static 'img/dutch.png' %}" alt="RED DEAD 2 IMG" width="180" height="160">
             <div>
-                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Dutch van der linde</h3>
-                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">​Dutch es el lider de la banda y mentor de varios miemobros de la banda tales como: arthur morgan y john marston. Dutch es un lider nato y bastante carismatico, pero tambien calculador y muy inteligente</p>
+                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Dutch van der Linde</h3>
+                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">​Dutch es el líder de la banda y mentor de varios miembros de la banda tales como Arthur Morgan y John Marston. Dutch es un líder nato y bastante carismático, pero también calculador y muy inteligente.</p>
             </div>
         </div>
-        <!-- cuarto personaje(micah bell) -->
+        <!-- Cuarto personaje (Micah Bell) -->
         <div class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-            <img src="{% static 'img/micah-bell.png'%}" alt="RED DEAD 2 IMG" width="180" height="160">
+            <img src="{% static 'img/micah-bell.png' %}" alt="RED DEAD 2 IMG" width="180" height="160">
             <div>
-                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Micah bell</h3>
-                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">Micah bell se unio a la banda cuando antes de un atraco que salio mal, lleva una relacion tensa con ciertos miebros debido a su personalida impredecible, salvaje y sin escrupulos. el vive por y para la accion​</p>
+                <h3 class="text-center fs-5 mt-4 px-4 pb-1 text-danger">Micah Bell</h3>
+                <p class="text-center px-4 text-light" style="font-family: 'Courier New', Courier, monospace;">Micah Bell se unió a la banda antes de un atraco que salió mal. Tiene una relación tensa con ciertos miembros debido a su personalidad impredecible, salvaje y sin escrúpulos. Él vive por y para la acción​.</p>
             </div>
         </div>
     </div>
 </section>
-<!-- FIN personajes -->
+<!-- Fin Personajes -->
 
 <!-- Por qué comprarlo -->
 <section>
     <div class="w-75 m-auto text-center" id="comprarlo">
-      <h1 class="mb-5 fs-2"><span class="text-danger">¿Por que comprar Red Dead Redemption 2 y sus juegos anteriores?
-      </span>
-      <p>  
-      </p>
-        <p class="fs-4 text-light" style="font-family: 'Courier New', Courier, monospace;">Red Dead Redemption 2 es un videojuego que destaca por su historia, jugabilidad y apartado grafico,
-         ademas de contar con un mundo abierto lleno de vida y actividades por hacer.
-         Red dead Redemption nos permite entender el personaje de John Marston y su pasado,
-         mientras que Red Dead Revolver es el inicio de la saga y nos permite conocer a Red Harlow. y como se llego a crear el mejor videojuego y saga de Rockstar Games.
-        
-        </p>
-      </h1>
+      <h1 class="mb-5 fs-2"><span class="text-danger">¿Por qué comprar Red Dead Redemption 2 y sus juegos anteriores?</span></h1>
+      <p class="fs-4 text-light" style="font-family: 'Courier New', Courier, monospace;">Red Dead Redemption 2 es un videojuego que destaca por su historia, jugabilidad y apartado gráfico, además de contar con un mundo abierto lleno de vida y actividades por hacer. Red Dead Redemption nos permite entender el personaje de John Marston y su pasado, mientras que Red Dead Revolver es el inicio de la saga y nos permite conocer a Red Harlow y cómo se creó la mejor saga de Rockstar Games.</p>
     </div>
-    <!-- Carrusel -->
-    <div id="carouselExample" class="carousel slide rounded-3" >
-        <div class="carousel-inner">
-          <div class="carousel-item active ">
-            <img src="{%static 'img/captura-uno.jpg' %}" class="center rounded-3" alt="captura-uno">
+
+    <!-- Carrusel de imágenes adicionales -->
+    <div id="carouselExample" class="carousel slide rounded-3">
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="{% static 'img/captura-uno.jpg' %}" class="center rounded-3" alt="captura-uno">
           </div>
           <div class="carousel-item">
-            <img src="{%static 'img/Captura-dos.jpg' %}" class="center rounded-3" alt="captura-dos">
+              <img src="{% static 'img/Captura-dos.jpg' %}" class="center rounded-3" alt="captura-dos">
           </div>
           <div class="carousel-item">
-            <img src="{%static 'img/captura-tres.jpg' %}" class="center rounded-3" alt="captura-tres">
+              <img src="{% static 'img/captura-tres.jpg' %}" class="center rounded-3" alt="captura-tres">
           </div>
-          <div class="carousel-item">
-            <img src="{%static 'img/Captura-cuatro.jpg' %}" class="center rounded-3" alt="captura-cuatro">
-          </div>
-          <div class="carousel-item">
-            <img src="{%static 'img/captura-cinco.jpg' %}" class="center rounded-3" alt="captura-cinco">
-          </div>
-          <div class="carousel-item">
-            <img src="{%static 'img/captura-seis.jpg' %}" class="center rounded-3" alt="captura-seis">
-          </div>
-          <div class="carousel-item">
-            <img src="{%static 'img/captura-siete.jpg' %}" class="center rounded-3" alt="captura-siete">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Siguiente</span>
-        </button>
       </div>
-      </section>
-<!-- Fin de por qué comprarlo -->
+      <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden text-light">anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden text-light">Siguientet</span>
+      </a>
+  </div>
+    <br>
+    <br>
+    <!-- Fin del por qué comprarlo -->
 
-<br>
-<br>
+    <!-- Sección de juegos con tarjetas -->
+    <div class="d-flex flex-wrap justify-content-around">
+      <!-- Tarjeta Red Dead Redemption 2 -->
+      <div class="card border-0" style="width: 18rem;">
+        <img src="{% static 'img/juego-carrito.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body" style="background-color: black;">
+          <h4 class="card-title text-danger">Red Dead Redemption 2</h4>
+          <p class="card-text text-light">Plataformas disponibles: PlayStation 4, Xbox One, Microsoft Windows
+            <br><br>
+            <strong>Precio: $50 USD</strong>
+          </p>
+          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRDR2">Comprar</a>
+        </div>
+      </div>
 
+      <!-- Tarjeta Red Dead Redemption 1 -->
+      <div class="card border-0" style="width: 18rem;">
+        <img src="{% static 'img/portada-red-dead.jpg' %}" class="card-img-top" alt="..." height="286px">
+        <div class="card-body" style="background-color: black;">
+          <h4 class="card-title text-danger">Red Dead Redemption 1</h4>
+          <p class="card-text text-light">Plataformas disponibles: PlayStation 4, Nintendo Switch, PlayStation 3, Xbox 360
+            <br><br>
+            <strong>Precio: $20 USD</strong> 
+          </p>
+          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRDR1">Comprar</a>
+        </div>
+      </div>
 
-<div class="d-flex flex-wrap justify-content-around">
-  <div class="card" style="width: 18rem;">
-    <img src="{%static 'img/juego-carrito.jpg' %}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Red Dead Redemption 2</h5>
-      <p class="card-text">Plataformas disponibles: PlayStation 4, Xbox One, Microsoft Windows
-        <br>
-        <br>  
-        <strong>Precio:$50 USD</strong>
-      </p>
-      <br>
-      <a href="{% url 'cart' %}" class="btn btn-primary">Comprar</a>
+      <!-- Tarjeta Red Dead Revolver -->
+      <div class="card border-0"   style="width: 18rem;">
+        <img src="{% static 'img/Red_Dead_Revolver_Coverart.jpg' %}" class="card-img-top" alt="..." height="286px">
+        <div class="card-body" style="background-color: black;">
+          <h4 class="card-title text-danger">Red Dead Revolver</h4>
+          <p class="card-text text-light">Plataformas disponibles: PlayStation 4, Xbox One, PlayStation 2, Xbox
+            <br><br>
+            <strong>Precio: $10 USD</strong>
+          </p>
+          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRevolver">Comprar</a>
+        </div>
+      </div>
     </div>
-  </div>
+    <!-- Fin de las tarjetas -->
 
-<div class="card" style="width: 18rem;">
-  <img src="{%static 'img/portada-red-dead.jpg' %}" class="card-img-top" alt="..." height="286px">
-  <div class="card-body">
-    <h5 class="card-title">Red Dead Redemption 1</h5>
-    <p class="card-text">Plataformas disponibles: PlayStation 4, Nintendo Switch, PlayStation 3, Xbox 360
-      <br>
-      <br>
-      <strong>Precio:$20 USD</strong> 
-      
-    </p>
-    <br>
-    <a href="{% url 'cart2' %}" class="btn btn-primary">Comprar</a>
+    <!-- Modales -->
+
+    <!-- Modal Red Dead Redemption 2 -->
+    <!-- Modal Red Dead Redemption 2 -->
+<div class="modal fade" id="modalRDR2" tabindex="-1" aria-labelledby="modalRDR2Label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border: 1px solid #dc3545; border-radius: 0.5rem;">
+          <div class="modal-header" style="background-color: #dc3545; color: white; border-bottom: n  one;">
+              <h5 class="modal-title" id="modalRDR2Label">Red Dead Redemption 2</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <img src="{% static 'img/modal_RDR2.jpg' %}" class="img-fluid" alt="Red Dead Redemption 2">
+              <p>Después de que un atraco en el pueblo de Blackwater sale muy mal, Arthur Morgan y la banda Van der Linde se ven obligados a huirse. Con agentes federales y los mejores cazarrecompensas persiguiéndolos, la banda debe robar, atracar y luchar por el duro corazón de Estados Unidos para sobrevivir.</p>
+          </div>
+          <div class="modal-footer" style="border-top: none;">
+              <a href="{% url 'cart' %}" class="btn btn-primary">Agregar al carrito</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal Red Dead Redemption 1 -->
+<div class="modal fade" id="modalRDR1" tabindex="-1" aria-labelledby="modalRDR1Label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border: 1px solid #dc3545; border-radius: 0.5rem;">
+          <div class="modal-header" style="background-color: #dc3545; color: white; border-bottom: none;">
+              <h5 class="modal-title" id="modalRDR1Label">Red Dead Redemption 1</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <img src="{% static 'img/modal_RDR1.jpg' %}" class="img-fluid" alt="Red Dead Redemption 1">
+              <p>en 1911, agentes del gobierno secuestran a la esposa y al hijo de John Marston, un antiguo bandido. Para poder reunirse con ellos de nuevo, debe matar a tres miembros de su antigua banda que consiguieron eludir a la justicia.</p>
+          </div>
+          <div class="modal-footer" style="border-top: none;">
+              <a href="{% url 'cart2' %}" class="btn btn-primary">Agregar al carrito</a>
+          </div>
+      </div>
   </div>
 </div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{%static 'img/Red_Dead_Revolver_Coverart.jpg' %}" class="card-img-top" alt="..." height="286px">
-  <div class="card-body">
-    <h5 class="card-title">Red Dead Revolver</h5>
-    <p class="card-text">Plataformas disponibles: PlayStation 4, Xbox One, PlayStation 2, Xbox
-      <br>
-      <br>
-      <strong>Precio:$10 USD</strong>
-    </p>
-    <br>
-    <a href="{% url 'cart3' %}" class="btn btn-primary">Comprar</a>
+<!-- Modal Red Dead Revolver -->
+<div class="modal fade" id="modalRevolver" tabindex="-1" aria-labelledby="modalRevolverLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border: 1px solid #dc3545; border-radius: 0.5rem;">
+          <div class="modal-header" style="background-color: #dc3545; color: white; border-bottom: none;">
+              <h5 class="modal-title" id="modalRevolverLabel">Red Dead Revolver</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <img src="{% static 'img/modal_revolver.jpg' %}" class="img-fluid" alt="Red Dead Revolver">
+              <p>nos cuenta la historia de Red Harlow y como luego que su papá fuera traicionado, inicia un camino de venganza que lo llevará a convertirse en un caza recompensas, ahí inicia nuestro camino cazando a los forajidos más grandes de Brimstone, mientras nos acercamos poco a poco a cumplir nuestra venganza</p>
+          </div>
+          <div class="modal-footer" style="border-top: none;">
+              <a href="{% url 'cart3' %}" class="btn btn-primary">Agregar al carrito</a>
+          </div>
+      </div>
   </div>
 </div>
-<!--fin de Creacion de cards para comprar el juego-->
 
-<!-- Footer -->
+    <!-- Fin de los modales -->
+
+    <!-- Footer -->
 <div class="container">
-    <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Inicio</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Preguntas frecuentes</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Acerca de nosotros</a></li>
-      </ul>
-      <p class="text-center text-warning">&copy; 2024 Rockstar Games</p>
-    </footer>
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Inicio</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Preguntas frecuentes</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-warning">Acerca de nosotros</a></li>
+    </ul>
+    <p class="text-center text-warning">&copy; 2024 Rockstar Games</p>
+  </footer>
 <!-- Fin footer -->
+    <!-- Fin Footer -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- Fin Scripts -->
+
 </body>
 </html>
