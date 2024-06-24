@@ -2,4 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center; /* Esto asegura que el contenido dentro del botón también esté centrado */
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+.bg-image {
+    background-image: url('../img/wallpaper-login.jpg');
+    background-size: cover;
+    background-position: center;
 }
