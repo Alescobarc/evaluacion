@@ -1,0 +1,105 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F7F7F7; /* Light gray background */
+        }
+       .navbar-dark.bg-dark {
+            background-color: #212121; /* Dark gray background for navbar */
+        }
+       .navbar-brand {
+            color: #FFC080; /* Orange color for navbar brand */
+        }
+       .nav-link {
+            color: #8B9467; /* Brown color for navbar links */
+        }
+       .nav-link:hover {
+            color: #FFFFFF; /* White color for navbar links on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">Panel de Administrador - Rockstar Games </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="nav-link">Cerrar sesión</button>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lista_ventas' %}">Lista de Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agregar_venta' %}">Añadir Venta</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Aquí va el contenido específico de cada página -->
+        {% endblock %}
+    </div>
+
+    <div class="container mt-4">
+        <h1 class="text-center" style="color: orange;">
+            <img src="{% static 'img/pistol.png' %}" alt="Pistol" width="70" height="70" style="margin-right: 10px;">
+            Bienvenidos, empleados de Rockstar Games!
+            <img src="{% static 'img/pistol.png' %}" alt="Rifle" width="70" height="70" style="margin-left: 10px;">
+        </h1>
+        <div class="mx-auto my-auto" style="width: 100px; height: 100px;">
+            <img src="{% static 'img/rockstar.png' %}" alt="Rockstar Games Logo" width="100" height="100">
+        </div>
+        <br>
+       
+        <h5 class="text-center" style="color: black;">En este panel de administrador, 
+            usted podrá administrar las ventas de nuestra tienda en línea de manera eficiente y segura.
+            Podrá visualizar y gestionar todas las ventas realizadas, 
+            así como agregar nuevas ventas y mantener un registro actualizado de nuestras operaciones comerciales.</h5>
+
+        <p class="text-center" style="color: black;">A continuación, 
+            se presentan las opciones disponibles en la barra de navegación:</p>
+
+        <ul>
+            <li style="color: black;">
+                                        Cerrar sesión: Cierra la sesión actual y regresa al inicio de sesión. 
+                                        Esta opción es útil cuando necesita salir del panel de administrador y volver a ingresar más tarde.
+                                        Asegúrese de cerrar sesión cuando termine de utilizar el panel de administrador
+                                        para mantener la seguridad de nuestra tienda en línea.</li>
+            <br>
+            <li style="color: black">
+                                        Lista de Ventas: Muestra una lista de todas las ventas realizadas en nuestra tienda en línea.
+                                        En esta sección, podrá visualizar la fecha de la venta, el monto total,
+                                        el estado de la venta y otros detalles importantes.
+                                        Puede utilizar esta información para analizar las tendencias de ventas y
+                                        tomar decisiones informadas para mejorar nuestras operaciones comerciales.</li>
+            <br>
+            <li style="color: black;">
+                                        Añadir Venta: Permite agregar una nueva venta a nuestra base de datos. 
+                                        Esta opción es útil cuando necesita registrar una venta manualmente
+                                        o cuando un cliente realiza una compra en nuestra tienda en línea.
+                                        Asegúrese de ingresar la información correcta y precisa para mantener un registro
+                                        actualizado de nuestras ventas.</li>
+        </ul>
+        <p class="text-center" style="color: black">
+                                                        Si necesita ayuda o tiene alguna pregunta, no dude en contactarnos.
+                                                        Estamos aquí para ayudarlo a utilizar este panel de administrador de manera efectiva.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.

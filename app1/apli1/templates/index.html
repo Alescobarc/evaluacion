@@ -61,6 +61,7 @@
         <li class="nav-item">
           <a class="nav-link text-light" href="{% url 'cart' %}">Carrito</a>
         </li>
+        <li class="nav-item">
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-link text-light">Cerrar sesión</button>
@@ -258,7 +259,7 @@
               <p>En 1911, agentes del gobierno secuestran a la esposa y al hijo de John Marston, un exbandido. Para poder reunirse con ellos nuevamente, debe asesinar a tres miembros de su antigua banda que lograron evadir la justicia.</p>
           </div>
           <div class="modal-footer" style="border-top: none;">
-              <a href="{% url 'cart2' %}" class="btn btn-primary">Agregar al carrito</a>
+              <a href="{% url 'cart' %}" class="btn btn-primary">Agregar al carrito</a>
           </div>
       </div>
   </div>
@@ -277,7 +278,7 @@
               <p>Narra la historia de Red Harlow, quien, tras la traición a su padre, emprende un camino de venganza que lo convierte en un cazador de recompensas. Nuestro viaje comienza cazando a los forajidos más peligrosos de Brimstone, acercándonos cada vez más a la justicia que anhelamos.</p>
           </div>
           <div class="modal-footer" style="border-top: none;">
-              <a href="{% url 'cart3' %}" class="btn btn-primary">Agregar al carrito</a>
+              <a href="{% url 'cart' %}" class="btn btn-primary">Agregar al carrito</a>
           </div>
       </div>
   </div>

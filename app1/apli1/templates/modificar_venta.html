@@ -1,0 +1,33 @@
+<!-- modificar_venta.html -->
+
+<!-- Extend the base template -->
+{% extends 'base.html' %}
+
+<!-- Define the page title -->
+{% block title %}Modificar Venta{% endblock %}
+
+<!-- Define the page content -->
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 class="text-center">Modificar Venta</h1>
+        <p class="lead text-center">Por favor, modifique la venta con ID {{ sale.id }}.</p>
+
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+          <a href="{% url 'lista_ventas' %}" class="btn btn-secondary btn-block">Cancelar</a>
+        </form>
+
+        <p class="text-muted">Instrucciones:</p>
+        <ul>
+          <li>Verifique que la venta sea la correcta antes de modificarla.</li>
+          <li>Asegúrese de que no haya ninguna otra venta relacionada con esta que deba ser modificada también.</li>
+          <li>Si tiene alguna duda, comuníquese con su supervisor o administrador.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

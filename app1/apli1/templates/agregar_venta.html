@@ -1,0 +1,58 @@
+<!-- agregar_venta.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Venta - Panel de Administrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Agregar Venta</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_product_name" class="form-label">Nombre del Producto</label>
+            {{ form.product_name }}
+            {% if form.product_name.errors %}
+                <div class="invalid-feedback">
+                    {{ form.product_name.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="id_price" class="form-label">Precio</label>
+            {{ form.price }}
+            {% if form.price.errors %}
+                <div class="invalid-feedback">
+                    {{ form.price.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="id_quantity" class="form-label">Cantidad</label>
+            {{ form.quantity }}
+            {% if form.quantity.errors %}
+                <div class="invalid-feedback">
+                    {{ form.quantity.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="id_date_sold" class="form-label">Fecha de Venta</label>
+            {{ form.date_sold }}
+            {% if form.date_sold.errors %}
+                <div class="invalid-feedback">
+                    {{ form.date_sold.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Venta</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

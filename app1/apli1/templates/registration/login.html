@@ -19,7 +19,7 @@
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Ingresa tus datos</h2>
                                 <form id="login-form" method="post" action="">
-                                    {% csrf_token %}
+                                    {% csrf_token %}    
                                     {{ form.as_p }}
                                     
                                     <div>
@@ -28,6 +28,10 @@
                                     </div>
                                     <div>
                                         <a href="{% url 'register' %}">Crear una cuenta</a>
+                                        <br><br>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'admin_login' %}">Acceso administrador</a>
                                         <br><br>
                                     </div>
                                     <div class="center-button">

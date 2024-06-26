@@ -18,18 +18,10 @@
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Ingresa tus datos</h2>
-                                <form id="login-form" method="post" action="{% url 'index' %}">
+                                <form id="login-form" method="post" action="">
                                     {% csrf_token %}
-                                    <div class="form-outline mb-4">
-                                        <input type="email" id="email" name="email" class="form-control form-control-lg" required>
-                                        <label class="form-label" for="email">Correo Electrónico</label>
-                                    </div>
-                                
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="contraseña" name="contraseña" class="form-control form-control-lg" required>
-                                        <label class="form-label" for="contraseña">Contraseña</label>
-                                    </div>
-
+                                    {{ form.as_p }}
+                                    
                                     <div>
                                         <a href="{% url 'recuperar' %}">¿Olvidaste tu contraseña?</a>
                                         <br><br>

@@ -1,0 +1,36 @@
+<!-- eliminar_venta.html -->
+
+<!-- Extend the base template -->
+{% extends 'base.html' %}
+
+<!-- Define the page title -->
+{% block title %}Eliminar Venta{% endblock %}
+
+<!-- Define the page content -->
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 class="text-center">Eliminar Venta</h1>
+        <p class="lead text-center">Por favor, confirme que desea eliminar la venta con ID {{ sale.id }}.</p>
+
+        <div class="alert alert-warning" role="alert">
+          <strong>Importante:</strong> Al eliminar esta venta, se borrará permanentemente de la base de datos. Asegúrese de que esta acción sea correcta antes de proceder.
+        </div>
+
+        <form method="post" action="{% url 'base_view' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-block">Eliminar Venta</button>
+          <a href="{% url 'lista_ventas' %}" class="btn btn-secondary btn-block">Cancelar</a>
+        </form>
+
+        <p class="text-muted">Instrucciones:</p>
+        <ul>
+          <li>Verifique que la venta sea la correcta antes de eliminarla.</li>
+          <li>Asegúrese de que no haya ninguna otra venta relacionada con esta que deba ser eliminada también.</li>
+          <li>Si tiene alguna duda, comuníquese con su supervisor o administrador.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
