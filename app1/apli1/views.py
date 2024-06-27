@@ -18,7 +18,6 @@ def Checkout(request):
     return render(request, 'Checkout.html')
 
 def user_login(request):
-    # Lógica de inicio de sesión para usuarios normales
     pass
 
 def base_view(request):
@@ -55,7 +54,7 @@ def admin_login(request):
 # CRUD de ventas
 
 
-def sales_list(request):
+def lista_ventas(request):
     sales = Sale.objects.all()
     return render(request, 'lista_ventas.html', {'sales': sales})
 
@@ -63,20 +62,20 @@ def agregar_venta(request):
     if request.method == 'POST':
         form = SaleForm(request.POST)
         if form.is_valid():
-            print("Form is valid")
+            print("Form no valido")
             form.save()
-            print("Form saved")
-            return redirect('lista_ventas')  # Redirect to the lista_ventas page
+            print("Form guardado")
+            return redirect('lista_ventas') 
         else:
-            print("Form is not valid")
-            print(form.errors)  # Print the errors in the form
+            print("Formato no valido")
+            print(form.errors)  
             for field, errors in form.errors.items():
-                print(f"Error in {field}: {errors}")
+                print(f"Error en {field}: {errors}")
     else:
         form = SaleForm()
     return render(request, 'agregar_venta.html', {'form': form})
 
-def sale_update(request, pk):
+def actualizar_ventas(request, pk):
     sale = get_object_or_404(Sale, pk=pk)
     if request.method == 'POST':
         form = SaleForm(request.POST, instance=sale)
@@ -87,7 +86,7 @@ def sale_update(request, pk):
         form = SaleForm(instance=sale)
     return render(request, 'modificar_venta.html', {'form': form})
 
-def sale_delete(request, pk):
+def eliminar_venta(request, pk):
     sale = get_object_or_404(Sale, pk=pk)
     if request.method == 'POST':
         sale.delete()
@@ -106,7 +105,7 @@ class StrikeCreateView(CreateView):
     success_url = '/strikes/'
 
     def form_valid(self, form):
-        form.save()  # Save the form data to the database
+        form.save()  
         return redirect(self.success_url)
 
 
