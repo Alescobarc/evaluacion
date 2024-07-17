@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from .models import Sale
 from .forms import SaleForm
 from django.views.generic import CreateView, ListView
-
 from .forms import AdminLoginForm
+
 
 def index(request):
     return render(request, 'index.html')
@@ -36,8 +35,8 @@ def admin_login(request):
     if request.method == 'POST':
         form = AdminLoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            username = form.cleaned_data['usuario']
+            password = form.cleaned_data['contraseña']
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 if user.is_staff:
@@ -107,7 +106,5 @@ class StrikeCreateView(CreateView):
     def form_valid(self, form):
         form.save()  
         return redirect(self.success_url)
-
-
-
+    
 

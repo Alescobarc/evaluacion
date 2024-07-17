@@ -10,9 +10,8 @@ urlpatterns = [
     path('recuperar/', views.recuperar, name='recuperar'),
     path('admin_login/', views.admin_login, name='admin_login'),
     path('base/', views.base_view, name='base_view'),
-    path('lista_ventas/', views.lista_ventas, name='lista_ventas'),  # Lista de ventas
-    path('agregar_venta/', views.agregar_venta, name='agregar_venta'),  # Añadir venta
-    path('modificar_venta/<int:pk>/', views.actualizar_ventas, name='modificar_venta'), # Actualizar venta
-    path('eliminar_venta/<int:pk>/', views.eliminar_venta, name='eliminar_venta'),  # Eliminar venta
-    # Otras URLs necesarias para tu aplicación
+    path('lista_ventas/', views.lista_ventas, name='lista_ventas'), 
+    path('agregar_venta/', views.agregar_venta, name='agregar_venta'),  
+    path('modificar_venta/<int:pk>/', views.actualizar_ventas, name='modificar_venta'),
+    path('eliminar_venta/<int:pk>/', views.eliminar_venta, name='eliminar_venta'),  
 ]
